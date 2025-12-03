@@ -160,7 +160,15 @@ public class UsuarioController {
     }
 
     @GetMapping("/vendedor/inicio")
-    public String vistaVendedor() {
+    public String vistaVendedor(HttpSession session, Model model) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("usuario", usuario);
+        // Cargar productos del vendedor autenticado
+        model.addAttribute("productos", productoService.listarProductosPorVendedor(usuario));
+        model.addAttribute("nuevoProducto", new com.example.confer.model.Producto());
         return "indexVendedor";
     }
 

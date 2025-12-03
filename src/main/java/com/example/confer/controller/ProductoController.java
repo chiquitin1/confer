@@ -446,6 +446,8 @@ public class ProductoController {
 
 }
 
+// esta es un linea de prueba para git-hub
+
 @Controller
 class IndexProductosController {
 
