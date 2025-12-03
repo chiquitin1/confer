@@ -414,6 +414,7 @@ public class ProductoController {
                     porcentaje = java.math.BigDecimal.ZERO;
                 }
             }
+            
 
             int updated = 0;
             List<Long> skipped = new ArrayList<>();
@@ -445,8 +446,6 @@ public class ProductoController {
     }
 
 }
-
-// esta es un linea de prueba para git-hub
 
 @Controller
 class IndexProductosController {
