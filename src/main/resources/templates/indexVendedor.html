@@ -751,6 +751,10 @@
                     <button type="button" class="btn" onclick="limpiarSeleccion()" id="btnClearSelection" style="padding:8px 18px;background:#f8f9fa;color:#333;border:1px solid #e1e5e9;">
                         <i class="fas fa-eraser"></i> Limpiar selección
                     </button>
+                    <!-- Botón PDF: descarga los productos del vendedor autenticado -->
+                    <a id="btnPdf" href="/vendedor/pdf-productos" class="btn btn-add" style="padding:8px 18px; display:inline-flex; align-items:center; text-decoration:none;" target="_blank" title="Descargar PDF de mis productos">
+                        <i class="fas fa-file-pdf" style="margin-right:8px;color:#fff;"></i> Descargar PDF
+                    </a>
                 </div>
 
                 <div class="table-container" th:if="${productos != null and !productos.empty}">

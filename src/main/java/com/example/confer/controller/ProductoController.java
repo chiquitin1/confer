@@ -210,6 +210,25 @@ public class ProductoController {
     @Autowired
     private ReporteProductoPDFService reporteProductoPDFService;
 
+    /**
+     * Endpoint para que el vendedor descargue un PDF con sus productos.
+     */
+    @GetMapping("/pdf-productos")
+    public ResponseEntity<InputStreamResource> descargarPDFProductosVendedor(HttpSession session) {
+        Usuario vendedor = (Usuario) session.getAttribute("usuario");
+        if (vendedor == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        List<Producto> productos = productoService.listarProductosPorVendedor(vendedor);
+        ByteArrayInputStream bis = reporteProductoPDFService.generarReporteProductos(productos);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=productos_vendedor.pdf");
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
+    }
+
     @GetMapping("/productos/reporte")
     public ResponseEntity<InputStreamResource> generarReporteProductos(@RequestParam(value = "categoria", required = false) String categoria,
                                                                      @RequestParam(value = "marca", required = false) String marca) {
